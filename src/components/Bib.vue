@@ -50,17 +50,18 @@ export default {
   },
   name: "Bib",
   props: ["bib"],
-  data(){
-      return{
-          sheet: false,
-          id: ""
-      }
+  data() {
+    return {
+      sheet: false,
+      id: ""
+    };
   },
-  methods:{
-      handleClick: function(id){
-          this.sheet = !this.sheet;
-          this.id = id;
-      }
+  methods: {
+    handleClick: function(id) {
+      this.sheet = false;//dit moet om ervoor te zorgen dat de state sws wordt gewijzigd.
+      this.sheet = true;
+      this.id = id;
+    }
   }
 };
 </script>
