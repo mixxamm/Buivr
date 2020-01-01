@@ -7,26 +7,20 @@
       :contain="bib.contain ? true : false"
       @load="load(bib)"
     >
-      <v-card-title :style="{ color: '#' + bib.tekstkleur }">{{
-        bib.naam
-      }}</v-card-title>
+      <v-card-title :style="{ color: '#' + bib.tekstkleur }">{{bib.naam}}</v-card-title>
     </v-img>
 
     <div class="kolom">
       <v-card-subtitle
         class="pb-0"
-        :style="[
-          (bib.aanwezigen.length < bib.capaciteit * 0.6 && bib.capaciteit <= 6 || bib.aanwezigen.length < bib.capaciteit * 0.7 && bib.capaciteit > 6) ? {} : { color: 'red' }
-        ]"
-        >{{ bib.aanwezigen.length }}/{{ bib.capaciteit }}</v-card-subtitle
-      >
+        :style="[(bib.aanwezigen.length < bib.capaciteit * 0.6 && bib.capaciteit <= 6) || (bib.aanwezigen.length < bib.capaciteit * 0.7 && bib.capaciteit > 6) ? {} : { color: 'red' }]"
+      >{{ bib.aanwezigen.length }}/{{ bib.capaciteit }}</v-card-subtitle>
       <v-chip
         class="ma-2"
         :color="bib.open ? 'primary' : 'red'"
         outlined
         pill
-        >{{ bib.open ? "Open" : "Gesloten" }}</v-chip
-      >
+      >{{ bib.open ? "Open" : "Gesloten" }}</v-chip>
     </div>
 
     <v-card-text class="text--primary">
