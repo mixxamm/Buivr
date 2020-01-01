@@ -1,22 +1,27 @@
 <template>
   <div>
-    <p>{{ this.$route.params.id }}</p>
+    <Bib :bib="bib"/>
   </div>
 </template>
 
 <script>
+import Bib from '@/components/Bib.vue'
 export default {
+  components:{
+    Bib
+  },
   name: "bib",
   data() {
     return {
-      bib: ""
+      bib: {}
     };
   },
   mounted() {
     this.axios
       .get(`http://localhost:3000/bib/${this.$route.params.id}`)
       .then(response => {
-        this.bibs = response.data;
+        this.bib = response.data;
+        console.log(response.data);
       })
       .catch(e => {
         this.errors.push(e);
@@ -25,4 +30,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>
