@@ -26,6 +26,7 @@ export default {
   methods: {
     onDecode(decodedString) {
       this.code = decodedString;
+      this.$router.push({ name: "bib", params: { id: this.code } });
     },
     async onInit(promise) {
       try {
