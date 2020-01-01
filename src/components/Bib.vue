@@ -16,7 +16,7 @@
       <v-card-subtitle
         class="pb-0"
         :style="[
-          bib.aanwezigen.length < bib.capaciteit * 0.6 ? {} : { color: 'red' }
+          (bib.aanwezigen.length < bib.capaciteit * 0.6 && bib.capaciteit <= 6 || bib.aanwezigen.length < bib.capaciteit * 0.7 && bib.capaciteit > 6) ? {} : { color: 'red' }
         ]"
         >{{ bib.aanwezigen.length }}/{{ bib.capaciteit }}</v-card-subtitle
       >
