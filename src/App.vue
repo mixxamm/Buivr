@@ -39,7 +39,10 @@ export default {
     // HelloWorld
     NaamDialog
   },
-
+  created: function() {
+    this.$store.commit('setNaam', localStorage.getItem('naam'));
+    console.log("test")
+  },
   data: () => ({
     //
   }),

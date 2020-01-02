@@ -10,6 +10,8 @@ export default new Vuex.Store({
   mutations: {
     setNaam(state, naam){
       state.naam = naam;
+      if(naam != null)
+        localStorage.setItem('naam', naam);
     }
   },
   actions: {},

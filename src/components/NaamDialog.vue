@@ -24,7 +24,7 @@ export default {
     name: "NaamDialog",
     computed: {
         dialog() {
-            return (this.$store.state.naam == "")
+            return (this.$store.state.naam == null || this.$store.state.naam == "")
         },
     },
     data(){
