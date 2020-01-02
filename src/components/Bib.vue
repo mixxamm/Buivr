@@ -23,13 +23,13 @@
           ]"
         >{{ bib.aanwezigen.length }}/{{ bib.capaciteit }}</v-card-subtitle>
         <div class="kolom chips">
-        <v-chip v-if="ingecheckt" class="ma-2" color="green" text-color="white">Ingecheckt</v-chip>
-        <v-chip
-          class="ma-2"
-          :color="bib.open ? 'primary' : 'red'"
-          outlined
-          pill
-        >{{ bib.open ? "Open" : "Gesloten" }}</v-chip>
+          <v-chip v-if="ingecheckt" class="ma-2" color="green" text-color="white">Ingecheckt</v-chip>
+          <v-chip
+            class="ma-2"
+            :color="bib.open ? 'primary' : 'red'"
+            outlined
+            pill
+          >{{ bib.open ? "Open" : "Gesloten" }}</v-chip>
         </div>
       </div>
 
@@ -60,7 +60,21 @@
         <v-btn color="orange" text @click="meerInfo(bib._id)">Meer informatie</v-btn>
       </v-card-actions>
     </v-card>
-    <QrSheet :sheet="sheet" :id="bib._id" :aanwezigen="bib.aanwezigen" />
+    <QrSheet :id="bib._id" :aanwezigen="bib.aanwezigen" />
+    <v-snackbar
+      v-model="snackbar"
+      :bottom="y === 'bottom'"
+      :color="color"
+      :left="x === 'left'"
+      :multi-line="mode === 'multi-line'"
+      :right="x === 'right'"
+      :timeout="timeout"
+      :top="y === 'top'"
+      :vertical="mode === 'vertical'"
+    >
+      {{ text }}
+      <v-btn dark text @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -76,13 +90,21 @@ export default {
     return {
       sheet: false,
       loading: false,
-      id: ""
+      id: "",
+      color: "error",
+      mode: "",
+      snackbar: false,
+      text: "Al ingecheckt in een andere bib",
+      timeout: 6000,
+      x: null,
+      y: "bottom"
     };
   },
   methods: {
     meerInfo: function(id) {
       //this.sheet = false; //dit moet om ervoor te zorgen dat de state sws wordt gewijzigd.
-      this.sheet = true;
+      // this.sheet = true;
+      this.$store.commit("setSheet", { id: id, visible: true });
       this.id = id;
     },
     checkIn: function(naam) {
@@ -92,8 +114,14 @@ export default {
           naam: this.$store.state.naam
         })
         .then(response => {
-          this.bib = response.data;
-          this.loading = false;
+          console.log(response.data);
+          if (response.data.error == true) {
+            this.loading = false;
+            this.snackbar = true;
+          } else {
+            this.bib = response.data;
+            this.loading = false;
+          }
         })
         .catch(e => {
           this.errors.push(e);
@@ -140,11 +168,11 @@ export default {
 </script>
 
 <style scoped>
-.kolom{
+.kolom {
   display: flex;
   justify-content: space-between;
 }
-.chips{
+.chips {
   justify-content: space-around;
 }
 </style>

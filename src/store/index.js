@@ -7,7 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     naam: "",
-    id: ""
+    id: "",
+    sheet: []
   },
   mutations: {
     setAccount(state, account) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     setNaam(state, naam) {
       state.naam = naam;
+    },
+    setSheet(state, sheet){
+      state.sheet.push(sheet);
     }
   },
   actions: {

@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-bottom-sheet v-model="sheet" inset>
+    <v-bottom-sheet v-model="this.$store.state.sheet.visible" inset>
       <v-sheet class="text-center" height="400px">
         <qrcode :value="id" :options="{ width: 300 }"></qrcode>
         <p>Aanwezigen: {{ aanwezigen.toString() }}</p>
@@ -12,7 +12,7 @@
 <script>
 export default {
   name: "QrSheet",
-  props: ["sheet", "id", "aanwezigen"]
+  props: ["id", "aanwezigen"]
 };
 </script>
 
