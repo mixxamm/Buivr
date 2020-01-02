@@ -11,7 +11,6 @@ Vue.use(VueAxios, axios);
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.config.productionTip = false;
 
-
 new Vue({
   router,
   vuetify,

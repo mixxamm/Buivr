@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card max-width="350">
+    <v-card max-width="350" :loading="loading">
       <v-img
         class="white--text align-end"
         height="200px"
@@ -8,9 +8,9 @@
         :contain="bib.contain ? true : false"
         @load="load(bib)"
       >
-        <v-card-title :style="{ color: '#' + bib.tekstkleur }">{{
-          bib.naam
-        }}</v-card-title>
+        <v-card-title :style="{ color: '#' + bib.tekstkleur }">
+          {{ bib.naam }}
+        </v-card-title>
       </v-img>
 
       <div class="kolom">
@@ -44,9 +44,14 @@
         </div>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="orange" text :disabled="!bib.open">Inchecken</v-btn>
-
-        <v-btn color="orange" text @click="handleClick(bib._id)"
+        <v-btn
+          color="orange"
+          text
+          :disabled="!bib.open"
+          @click="checkIn('naam')"
+          >Inchecken</v-btn
+        >
+        <v-btn color="orange" text @click="meerInfo(bib._id)"
           >Meer informatie</v-btn
         >
       </v-card-actions>
@@ -66,14 +71,19 @@ export default {
   data() {
     return {
       sheet: false,
+      loading: false,
       id: ""
     };
   },
   methods: {
-    handleClick: function(id) {
+    meerInfo: function(id) {
       this.sheet = false; //dit moet om ervoor te zorgen dat de state sws wordt gewijzigd.
       this.sheet = true;
       this.id = id;
+    },
+    checkIn: function(naam) {
+      this.loading = true;
+      setTimeout(() => (this.loading = false), 2000);
     }
   }
 };

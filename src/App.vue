@@ -8,7 +8,7 @@
 
         <v-toolbar-items>
           <v-btn text to="/">Bibs</v-btn>
-          <v-btn text to="/account">Account | {{naam}}</v-btn>
+          <v-btn text to="/account">Account | {{ naam }}</v-btn>
         </v-toolbar-items>
 
         <!-- <template v-if="$vuetify.breakpoint.smAndUp">
@@ -25,12 +25,12 @@
       </v-toolbar>
     </div>
     <router-view></router-view>
-    <NaamDialog/>
+    <NaamDialog />
   </v-app>
 </template>
 <script>
 //import HelloWorld from "./components/HelloWorld";
-import NaamDialog from './components/NaamDialog';
+import NaamDialog from "./components/NaamDialog";
 
 export default {
   name: "App",
@@ -40,8 +40,7 @@ export default {
     NaamDialog
   },
   created: function() {
-    this.$store.commit('setNaam', localStorage.getItem('naam'));
-    console.log("test")
+    this.$store.commit("setNaam", localStorage.getItem("naam"));
   },
   data: () => ({
     //

@@ -45,6 +45,11 @@ export default {
       console.log(bib);
       //bib.loading = false;
     }
+  },
+  computed: {
+    count() {
+      return this.$store.state.count;
+    }
   }
 };
 </script>
