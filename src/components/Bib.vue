@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card max-width="350" :loading="loading">
+    <v-card max-width="350" :loading="loading" :color="color" light>
       <v-img
         class="white--text align-end"
         height="200px"
@@ -45,18 +45,27 @@
       </v-card-text>
       <v-card-actions>
         <v-btn
+          v-if="!ingecheckt"
           color="orange"
           text
           :disabled="!bib.open"
           @click="checkIn('naam')"
           >Inchecken</v-btn
         >
+        <v-btn
+          v-if="ingecheckt"
+          color="red"
+          text
+          :disabled="!bib.open"
+          @click="checkUit('naam')"
+          >Uitchecken</v-btn
+        >
         <v-btn color="orange" text @click="meerInfo(bib._id)"
           >Meer informatie</v-btn
         >
       </v-card-actions>
     </v-card>
-    <QrSheet :sheet="sheet" :id="id" :aanwezigen="bib.aanwezigen" />
+    <QrSheet :sheet="sheet" :id="bib._id" :aanwezigen="bib.aanwezigen" />
   </div>
 </template>
 
@@ -72,7 +81,7 @@ export default {
     return {
       sheet: false,
       loading: false,
-      id: ""
+      id: "",
     };
   },
   methods: {
@@ -83,7 +92,35 @@ export default {
     },
     checkIn: function(naam) {
       this.loading = true;
-      setTimeout(() => (this.loading = false), 2000);
+      this.axios
+      .post(`http://192.168.43.97:3000/bib/${this.bib._id}/checkin`, {naam: this.$store.state.naam})
+      .then(response => {
+        this.bib = response.data;
+        this.loading = false;
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
+    },
+    checkUit: function(naam){
+      this.loading = true;
+      this.axios
+      .post(`http://192.168.43.97:3000/bib/${this.bib._id}/checkuit`, {naam: this.$store.state.naam})
+      .then(response => {
+        this.bib = response.data;
+        this.loading = false;
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
+    }
+  },
+  computed: {
+    color: function(){
+      return (this.ingecheckt ? "#eeffff" : "ffffff")
+    },
+    ingecheckt: function(){
+      return this.bib.aanwezigen.includes(this.$store.state.naam);
     }
   }
 };
