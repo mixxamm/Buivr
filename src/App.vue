@@ -8,7 +8,7 @@
 
         <v-toolbar-items>
           <v-btn text to="/">Bibs</v-btn>
-          <v-btn text to="/account">Account</v-btn>
+          <v-btn text to="/account">Account | {{naam}}</v-btn>
         </v-toolbar-items>
 
         <!-- <template v-if="$vuetify.breakpoint.smAndUp">
@@ -25,20 +25,28 @@
       </v-toolbar>
     </div>
     <router-view></router-view>
+    <NaamDialog/>
   </v-app>
 </template>
 <script>
 //import HelloWorld from "./components/HelloWorld";
+import NaamDialog from './components/NaamDialog';
 
 export default {
   name: "App",
 
   components: {
     // HelloWorld
+    NaamDialog
   },
 
   data: () => ({
     //
-  })
+  }),
+  computed: {
+    naam() {
+      return this.$store.state.naam;
+    }
+  }
 };
 </script>
