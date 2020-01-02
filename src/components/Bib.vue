@@ -8,7 +8,9 @@
         :contain="bib.contain ? true : false"
         @load="load(bib)"
       >
-        <v-card-title :style="{ color: '#' + bib.tekstkleur }">{{ bib.naam }}</v-card-title>
+        <v-card-title :style="{ color: '#' + bib.tekstkleur }">{{
+          bib.naam
+        }}</v-card-title>
       </v-img>
 
       <div class="kolom">
@@ -21,15 +23,23 @@
               ? {}
               : { color: 'red' }
           ]"
-        >{{ bib.aanwezigen.length }}/{{ bib.capaciteit }}</v-card-subtitle>
+          >{{ bib.aanwezigen.length }}/{{ bib.capaciteit }}</v-card-subtitle
+        >
         <div class="kolom chips">
-          <v-chip v-if="ingecheckt" class="ma-2" color="green" text-color="white">Ingecheckt</v-chip>
+          <v-chip
+            v-if="ingecheckt"
+            class="ma-2"
+            color="green"
+            text-color="white"
+            >Ingecheckt</v-chip
+          >
           <v-chip
             class="ma-2"
             :color="bib.open ? 'primary' : 'red'"
             outlined
             pill
-          >{{ bib.open ? "Open" : "Gesloten" }}</v-chip>
+            >{{ bib.open ? "Open" : "Gesloten" }}</v-chip
+          >
         </div>
       </div>
 
@@ -48,16 +58,20 @@
           color="orange"
           text
           :disabled="!bib.open"
-          @click="checkIn('naam')"
-        >Inchecken</v-btn>
+          @click="checkIn()"
+          >Inchecken</v-btn
+        >
         <v-btn
           v-if="ingecheckt"
           color="red"
           text
           :disabled="!bib.open"
-          @click="checkUit('naam')"
-        >Uitchecken</v-btn>
-        <v-btn color="orange" text @click="meerInfo(bib._id)">Meer informatie</v-btn>
+          @click="checkUit()"
+          >Uitchecken</v-btn
+        >
+        <v-btn color="orange" text @click="meerInfo(bib._id)"
+          >Meer informatie</v-btn
+        >
       </v-card-actions>
     </v-card>
     <QrSheet :id="bib._id" :aanwezigen="bib.aanwezigen" />
@@ -107,10 +121,10 @@ export default {
       this.$store.commit("setSheet", { id: id, visible: true });
       this.id = id;
     },
-    checkIn: function(naam) {
+    checkIn: function() {
       this.loading = true;
       this.axios
-        .post(`http://192.168.43.97:3000/bib/${this.bib._id}/checkin`, {
+        .post(`${this.$store.state.api_ip}/bib/${this.bib._id}/checkin`, {
           naam: this.$store.state.naam
         })
         .then(response => {
@@ -127,10 +141,10 @@ export default {
           this.errors.push(e);
         });
     },
-    checkUit: function(naam) {
+    checkUit: function() {
       this.loading = true;
       this.axios
-        .post(`http://192.168.43.97:3000/bib/${this.bib._id}/checkuit`, {
+        .post(`${this.$store.state.api_ip}/bib/${this.bib._id}/checkuit`, {
           naam: this.$store.state.naam
         })
         .then(response => {
@@ -140,12 +154,9 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
-    },
+    }
   },
   computed: {
-    color: function() {
-      return this.ingecheckt ? "#eeffff" : null;
-    },
     ingecheckt: function() {
       return this.bib.aanwezigen.includes(this.$store.state.naam);
     }

@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     naam: "",
     id: "",
-    sheet: []
+    sheet: [],
+    api_ip: "http://192.168.0.248:3000"
   },
   mutations: {
     setAccount(state, account) {
@@ -21,13 +22,13 @@ export default new Vuex.Store({
     setNaam(state, naam) {
       state.naam = naam;
     },
-    setSheet(state, sheet){
-      if(!state.sheet.some(el => el.id === sheet.id)){
+    setSheet(state, sheet) {
+      if (!state.sheet.some(el => el.id === sheet.id)) {
         state.sheet.push(sheet);
-      }else{
+      } else {
         let index = state.sheet.findIndex(item => item.id == sheet.id);
         state.sheet[index].visible = sheet.visible;
-      }        
+      }
     }
   },
   actions: {

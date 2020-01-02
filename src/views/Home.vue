@@ -28,7 +28,7 @@ export default {
   },
   mounted() {
     this.axios
-      .get(`http://192.168.43.97:3000/bib`)
+      .get(`${this.$store.state.api_ip}/bib`)
       .then(response => {
         const bibs = response.data.map(bib => {
           bib.loading = true;

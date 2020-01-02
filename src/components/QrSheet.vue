@@ -22,10 +22,12 @@ export default {
         if (sheet.length > 0) {
           console.log(sheet, sheet.length);
           return sheet[0].visible;
+        } else {
+          return false;
         }
       },
-      set(value){
-        return this.$store.commit('setSheet', {id: this.id, visible: false})
+      set(value) {
+        return this.$store.commit("setSheet", { id: this.id, visible: value });
       }
     }
   }
