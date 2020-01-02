@@ -73,7 +73,7 @@
       :vertical="mode === 'vertical'"
     >
       {{ text }}
-      <v-btn dark text @click="snackbar = false">Close</v-btn>
+      <v-btn dark text @click="snackbar = false">Sluiten</v-btn>
     </v-snackbar>
   </div>
 </template>
@@ -141,20 +141,6 @@ export default {
           this.errors.push(e);
         });
     },
-    checkIn2: function(naam) {
-      this.loading = true;
-      this.axios
-        .post(`http://192.168.43.97:3000/bib/${this.bib._id}/checkin`, {
-          naam: this.$store.state.naam
-        })
-        .then(response => {
-          this.bib = response.data;
-          this.loading = false;
-        })
-        .catch(e => {
-          this.errors.push(e);
-        });
-    }
   },
   computed: {
     color: function() {

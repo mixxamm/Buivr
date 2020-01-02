@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-bottom-sheet v-model="this.$store.state.sheet.visible" inset>
+    <v-bottom-sheet v-model="sheet" inset>
       <v-sheet class="text-center" height="400px">
         <qrcode :value="id" :options="{ width: 300 }"></qrcode>
         <p>Aanwezigen: {{ aanwezigen.toString() }}</p>
@@ -12,7 +12,23 @@
 <script>
 export default {
   name: "QrSheet",
-  props: ["id", "aanwezigen"]
+  props: ["id", "aanwezigen"],
+  computed: {
+    sheet: {
+      get() {
+        const sheet = this.$store.state.sheet.filter(
+          sheet => sheet.id == this.id
+        );
+        if (sheet.length > 0) {
+          console.log(sheet, sheet.length);
+          return sheet[0].visible;
+        }
+      },
+      set(value){
+        return this.$store.commit('setSheet', {id: this.id, visible: false})
+      }
+    }
+  }
 };
 </script>
 

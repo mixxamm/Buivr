@@ -22,7 +22,12 @@ export default new Vuex.Store({
       state.naam = naam;
     },
     setSheet(state, sheet){
-      state.sheet.push(sheet);
+      if(!state.sheet.some(el => el.id === sheet.id)){
+        state.sheet.push(sheet);
+      }else{
+        let index = state.sheet.findIndex(item => item.id == sheet.id);
+        state.sheet[index].visible = sheet.visible;
+      }        
     }
   },
   actions: {
