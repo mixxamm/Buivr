@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Bib :bib="bib" />
+  <div class="flex">
+    <Bib :bib="bib" class="bib"/>
   </div>
 </template>
 
@@ -30,4 +30,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.bib {
+  margin: 16px auto;
+}
+.flex {
+  display: flex;
+  justify-content: center;
+}
+.kolom {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
