@@ -6,7 +6,6 @@
         height="200px"
         :src="bib.foto"
         :contain="bib.contain ? true : false"
-        @load="load(bib)"
       >
         <v-card-title :style="{ color: '#' + bib.tekstkleur }">{{
           bib.naam
