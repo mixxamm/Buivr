@@ -79,7 +79,7 @@ export default {
 <style scoped>
 h1 {
   text-align: center;
-  margin: 16px;
+  margin: 65px 16px;
 }
 .nieuw,
 .categorie {
