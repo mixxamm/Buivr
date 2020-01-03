@@ -1,6 +1,6 @@
 <template>
   <div class="bib-container">
-    <v-card :color="color" dark v-if="!zichtbaar" min-width="560" min-height="315" @click="zichtbaar = !zichtbaar">
+    <v-card :color="color" dark v-if="!zichtbaar" min-width="560" max-width="560" min-height="315" @click="zichtbaar = !zichtbaar">
       <v-card-title class="headline justify-center align-center">{{titel}}</v-card-title>
       <v-card-text class="headline font-weight-bold justify-center">{{beschrijving}}</v-card-text>
     </v-card>
