@@ -23,6 +23,11 @@ const routes = [
     path: "/bib/:id",
     name: "bib",
     component: () => import("../views/Bib.vue")
+  },
+  {
+    path: "/colleges/",
+    name: "colleges",
+    component: () => import("../views/Colleges.vue")
   }
 ];
 

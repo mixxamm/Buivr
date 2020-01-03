@@ -8,6 +8,7 @@
 
         <v-toolbar-items>
           <v-btn text to="/">Bibs</v-btn>
+          <v-btn text to="/colleges">Colleges</v-btn>
           <v-btn text to="/account">Account | {{ naam }}</v-btn>
         </v-toolbar-items>
 
