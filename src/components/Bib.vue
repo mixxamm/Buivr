@@ -23,7 +23,7 @@
               ? {}
               : { color: 'red' }
           ]"
-          >{{ bib.aanwezigen.length }}/{{ bib.capaciteit }}</v-card-subtitle
+          ><v-progress-circular :value="(bib.aanwezigen.length/bib.capaciteit) * 100">{{ bib.aanwezigen.length }}</v-progress-circular></v-card-subtitle
         >
         <div class="kolom chips">
           <v-chip
