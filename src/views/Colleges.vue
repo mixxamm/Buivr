@@ -14,10 +14,10 @@
         </div>
       </div>
     </div>
-    <div class="web" v-if="collegesWeb.length > 0">
-        <h2 class="headline">Web</h2>
+    <div class="categorie" v-for="categorie in categorien" v-bind:key="categorie">
+      <h2 class="headline">{{categorie}}</h2>
       <div class="flex">
-        <div v-for="college in collegesWeb" v-bind:key="college._id">
+        <div v-for="college in collegesFilter(categorie)" v-bind:key="college._id">
           <College
             :link="college.link"
             :titel="college.titel"
@@ -28,7 +28,10 @@
       </div>
     </div>
     <img src="../assets/colleges.svg" id="colleges-img" />
-    <p class="body-1">Begin met leren en bouw jouw beste toekomst, vandaag.</p>
+    <p class="body-1">
+      Begin met leren en bouw jouw beste toekomst,
+      <span>vandaag</span>.
+    </p>
   </div>
 </template>
 
@@ -55,9 +58,17 @@ export default {
       });
   },
   computed: {
-    collegesWeb: function() {
+    categorien: function() {
+      const categorien = this.colleges
+        .filter(college => college.categorie !== undefined)
+        .map(college => college.categorie);
+      return [...new Set(categorien)];
+    }
+  },
+  methods: {
+      collegesFilter: function(categorie) {
       const filtered = this.colleges.filter(
-        college => college.categorie == "Web"
+        college => college.categorie == categorie
       );
       return filtered;
     }
@@ -70,7 +81,8 @@ h1 {
   text-align: center;
   margin: 16px;
 }
-.nieuw, .web {
+.nieuw,
+.categorie {
   max-width: 80%;
   margin: 40px auto;
 }
@@ -81,20 +93,29 @@ h1 {
 .flex::-webkit-scrollbar {
   display: none;
 }
-@media (max-width: 600px) {
-  .nieuw {
-    max-width: 100%;
-  }
-  h2 {
-    margin-left: 25px;
-  }
-}
 #colleges-img {
   max-width: 500px;
   margin: 0 auto;
   display: block;
 }
+
 .body-1 {
   text-align: center;
+}
+span {
+  color: #ffc107;
+  font-weight: bold;
+}
+@media (max-width: 600px) {
+  .nieuw,
+  .categorie {
+    max-width: 100%;
+  }
+  h2 {
+    margin-left: 25px;
+  }
+  #colleges-img {
+    max-width: 80%;
+  }
 }
 </style>
