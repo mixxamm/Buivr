@@ -9,7 +9,7 @@ export default new Vuex.Store({
     naam: "",
     id: "",
     sheet: [],
-    api_ip: "http://192.168.0.248:3000"
+    api_ip: "https://buivrapi.herokuapp.com"
   },
   mutations: {
     setAccount(state, account) {
@@ -34,7 +34,7 @@ export default new Vuex.Store({
   actions: {
     setNaam({ commit }, naam) {
       axios
-        .put(`http://192.168.43.97:3000/account`, { naam: naam })
+        .put(`${this.state.api_ip}/account`, { naam: naam })
         .then(response => {
           console.log(response);
           commit("setAccount", response.data);
