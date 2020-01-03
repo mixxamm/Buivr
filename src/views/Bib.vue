@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <Bib :bib="bib" class="bib"/>
+    <Bib :bib="bib" class="bib" />
   </div>
 </template>
 
