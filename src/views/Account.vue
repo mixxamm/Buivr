@@ -6,7 +6,6 @@
       @init="onInit"
       style="max-width: 400px;"
     ></qrcode-stream>
-    <p>{{ code }}</p>
   </div>
 </template>
 
