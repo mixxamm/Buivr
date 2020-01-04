@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card max-width="350" :loading="loading">
+    <v-card width="350" :loading="loading">
       <v-img
         class="white--text align-end"
         height="200px"
@@ -43,14 +43,16 @@
       </div>
 
       <v-card-text class="text--primary">
-        <div>{{ bib.beschrijving }}</div>
-        <div>
+        <div class="flex">
           <v-icon>place</v-icon>
+          <div>
           {{ bib.adres.straat }} {{ bib.adres.nummer }},
           {{ bib.adres.postcode }}
           {{ bib.adres.plaats }}
+          </div>
         </div>
       </v-card-text>
+      
       <v-card-actions>
         <v-btn
           v-if="!ingecheckt"
@@ -170,5 +172,8 @@ export default {
 }
 .chips {
   justify-content: space-around;
+}
+.flex{
+  display: flex;
 }
 </style>
