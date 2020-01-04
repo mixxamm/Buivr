@@ -32,25 +32,30 @@
       Begin met leren en bouw jouw beste toekomst,
       <span>vandaag</span>.
     </p>
+    <vue-topprogress color="#00bcd4" ref="topProgress"></vue-topprogress>
   </div>
 </template>
 
 <script>
 import College from "@/components/College.vue";
+import { vueTopprogress } from 'vue-top-progress'
 export default {
   components: {
-    College
+    College,
+    vueTopprogress
   },
   name: "colleges",
   data() {
     return {
-      colleges: []
+      colleges: [],
     };
   },
   mounted() {
+    this.$refs.topProgress.start()
     this.axios
       .get(`${this.$store.state.api_ip}/college`)
       .then(response => {
+        this.$refs.topProgress.done()
         this.colleges = response.data;
       })
       .catch(e => {
