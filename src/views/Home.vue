@@ -6,7 +6,7 @@
         <Bib :bib="bib" />
       </div>
     </div>
-    <vue-topprogress color="#00bcd4" ref="topProgress"></vue-topprogress>
+     <vue-topprogress color="#00bcd4" ref="topProgress"></vue-topprogress>
   </div>
 </template>
 
@@ -33,10 +33,10 @@ export default {
       .then(response => {
         const bibs = response.data.map(bib => {
           bib.loading = true;
-          this.$refs.topProgress.done()
           return bib;
         });
         this.bibs = bibs;
+        this.$refs.topProgress.done()
       })
       .catch(e => {
         this.errors.push(e);
@@ -57,20 +57,23 @@ export default {
 </script>
 <style scoped>
 .bib {
-  margin: 16px auto;
+  margin: 16px;
 }
 .flex {
   display: flex;
-  justify-content: center;
-}
-.kolom {
-  display: flex;
-  justify-content: space-between;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  max-width: 80%;
+  justify-content: flex-start;
 }
 @media (orientation: portrait) {
   .flex {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    max-width: 95%;
+    margin: 0 auto;
   }
 }
 </style>
