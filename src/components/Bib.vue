@@ -66,7 +66,6 @@
           v-if="ingecheckt"
           color="red"
           text
-          :disabled="!bib.open"
           @click="checkUit()"
           >Uitchecken</v-btn
         >
