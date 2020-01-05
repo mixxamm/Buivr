@@ -3,7 +3,7 @@
     <v-bottom-sheet v-model="sheet" inset>
       <v-sheet class="text-center" height="400px">
         <qrcode :value="id" :options="{ width: 300 }"></qrcode>
-        <p>Aanwezigen: {{ aanwezigen.toString() }}</p>
+        <p>Aanwezigen: {{ (aanwezigen.length > 0 ? aanwezigenString : "/") }}</p>
       </v-sheet>
     </v-bottom-sheet>
   </div>
@@ -29,6 +29,11 @@ export default {
       set(value) {
         return this.$store.commit("setSheet", { id: this.id, visible: value });
       }
+    },
+    aanwezigenString: function(){
+      let result = ""
+      this.aanwezigen.forEach((naam, i) => {result += naam + (this.aanwezigen.length > i + 1 ? ', ' : '')})
+      return result
     }
   }
 };
