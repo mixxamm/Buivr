@@ -1,10 +1,11 @@
 <template>
   <div>
+    <h1 class="display-1">Scan een QR-code van een bib.</h1>
     <p class="error">{{ error }}</p>
     <qrcode-stream
       @decode="onDecode"
       @init="onInit"
-      style="max-width: 400px;"
+      style="max-width: 400px; margin: 0 auto;"
     ></qrcode-stream>
   </div>
 </template>
@@ -50,4 +51,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+h1{
+  text-align: center;
+}
+</style>
