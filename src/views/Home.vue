@@ -6,20 +6,17 @@
         <Bib :bib="bib" />
       </div>
     </div>
-     <vue-topprogress color="#00bcd4" ref="topProgress"></vue-topprogress>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Bib from "@/components/Bib.vue";
-import { vueTopprogress } from 'vue-top-progress'
 
 export default {
   name: "home",
   components: {
-    Bib,
-    vueTopprogress
+    Bib
   },
   data() {
     return {
@@ -27,7 +24,6 @@ export default {
     };
   },
   mounted() {
-    this.$refs.topProgress.start()
     this.axios
       .get(`${this.$store.state.api_ip}/bib`)
       .then(response => {
@@ -36,7 +32,6 @@ export default {
           return bib;
         });
         this.bibs = bibs;
-        this.$refs.topProgress.done()
       })
       .catch(e => {
         this.errors.push(e);
