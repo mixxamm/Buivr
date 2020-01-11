@@ -50,6 +50,7 @@
         </v-btn>
       </v-bottom-navigation>
     </div>
+    <vue-ins-progress-bar></vue-ins-progress-bar>
   </v-app>
 </template>
 <script>

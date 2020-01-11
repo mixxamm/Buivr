@@ -48,10 +48,12 @@ export default {
     };
   },
   mounted() {
+    this.$insProgress.start()
     this.axios
       .get(`${this.$store.state.api_ip}/college`)
       .then(response => {
         this.colleges = response.data;
+        this.$insProgress.finish()
       })
       .catch(e => {
         this.errors.push(e);

@@ -24,6 +24,7 @@ export default {
     };
   },
   mounted() {
+    this.$insProgress.start()
     this.axios
       .get(`${this.$store.state.api_ip}/bib`)
       .then(response => {
@@ -32,6 +33,7 @@ export default {
           return bib;
         });
         this.bibs = bibs;
+        this.$insProgress.finish()
       })
       .catch(e => {
         this.errors.push(e);
