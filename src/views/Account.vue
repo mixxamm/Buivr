@@ -30,16 +30,19 @@ export default {
     },
     async onInit(promise) {
       try {
+        this.$insProgress.start()
         await promise;
+        this.$insProgress.finish()
       } catch (error) {
+        this.$insProgress.finish()
         if (error.name === "NotAllowedError") {
-          this.error = "ERROR: you need to grant camera access permisson";
+          this.error = "ERROR: je moet toegang geven tot de camera.";
         } else if (error.name === "NotFoundError") {
-          this.error = "ERROR: no camera on this device";
+          this.error = "ERROR: dit toestel heeft geen camera.";
         } else if (error.name === "NotSupportedError") {
-          this.error = "ERROR: secure context required (HTTPS, localhost)";
+          this.error = "ERROR: beveiligde verbinding vereist.";
         } else if (error.name === "NotReadableError") {
-          this.error = "ERROR: is the camera already in use?";
+          this.error = "ERROR: camera al in gebruik door andere app.";
         } else if (error.name === "OverconstrainedError") {
           this.error = "ERROR: installed cameras are not suitable";
         } else if (error.name === "StreamApiNotSupportedError") {
