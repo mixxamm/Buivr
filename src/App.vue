@@ -82,11 +82,12 @@ export default {
   margin-bottom: 56px;
 }
 .fade-enter-active {
-  transition: all .4s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: all .6s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .fade-enter /* .fade-leave-active below version 2.1.8 */ {
-  transform: scale(0.95);
+  /*transform: scale(0.98);*/
+  opacity: 0;
 }
 
 </style>
