@@ -6,8 +6,10 @@
         <v-spacer></v-spacer>
         <v-text class="body-1">{{naam}}</v-text>
       </v-toolbar>
-      <router-view class="router"></router-view>
-    <NaamDialog />
+      <transition name="fade">
+        <router-view class="router"></router-view>
+      </transition>
+      <NaamDialog />
       <!-- <v-toolbar color="amber">
         <v-toolbar-title>Buivr</v-toolbar-title>
 
@@ -30,29 +32,23 @@
             <v-icon>mdi-plus-circle</v-icon>
           </v-btn>
         </template> 
-      </v-toolbar> -->
-      <v-bottom-navigation
-    :value="activeBtn"
-    grow
-    color="amber"
-    fixed
-    shift
-  >
-    <v-btn to="/">
-      <span>Bibs</span>
-      <v-icon>mdi-library</v-icon>
-    </v-btn>
+      </v-toolbar>-->
+      <v-bottom-navigation :value="activeBtn" grow color="amber" fixed shift>
+        <v-btn to="/">
+          <span>Bibs</span>
+          <v-icon>mdi-library</v-icon>
+        </v-btn>
 
-    <v-btn to="/colleges">
-      <span>Colleges</span>
-      <v-icon>mdi-heart</v-icon>
-    </v-btn>
+        <v-btn to="/colleges">
+          <span>Colleges</span>
+          <v-icon>mdi-heart</v-icon>
+        </v-btn>
 
-    <v-btn to="/account">
-      <span>Account</span>
-      <v-icon>mdi-account-circle</v-icon>
-    </v-btn>
-  </v-bottom-navigation>
+        <v-btn to="/account">
+          <span>Account</span>
+          <v-icon>mdi-account-circle</v-icon>
+        </v-btn>
+      </v-bottom-navigation>
     </div>
   </v-app>
 </template>
@@ -65,7 +61,7 @@ export default {
 
   components: {
     // HelloWorld
-    NaamDialog
+    NaamDialog,
   },
   created: function() {
     this.$store.commit("setNaam", localStorage.getItem("naam"));
@@ -81,7 +77,15 @@ export default {
 };
 </script>
 <style scoped>
-.router{
+.router {
   margin-bottom: 56px;
 }
+.fade-enter-active {
+  transition: all .4s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.fade-enter /* .fade-leave-active below version 2.1.8 */ {
+  transform: scale(0.95);
+}
+
 </style>
