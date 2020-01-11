@@ -119,5 +119,8 @@ span {
   #colleges-img {
     max-width: 80%;
   }
+  .display-3{
+    font-size: 2.75rem!important;
+  }
 }
 </style>
