@@ -125,7 +125,7 @@ export default {
       this.loading = true;
       this.axios
         .post(`${this.$store.state.api_ip}/bib/${this.bib._id}/checkin`, {
-          naam: this.$store.state.naam
+          naam: this.$store.state.user.data.displayName
         })
         .then(response => {
           console.log(response.data);
@@ -145,7 +145,7 @@ export default {
       this.loading = true;
       this.axios
         .post(`${this.$store.state.api_ip}/bib/${this.bib._id}/checkuit`, {
-          naam: this.$store.state.naam
+          naam: this.$store.state.user.data.displayName
         })
         .then(response => {
           this.bib = response.data;
@@ -158,7 +158,7 @@ export default {
   },
   computed: {
     ingecheckt: function() {
-      return this.bib.aanwezigen.includes(this.$store.state.naam);
+      return this.bib.aanwezigen.includes(this.$store.state.user.data.displayName);
     }
   }
 };

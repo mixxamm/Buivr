@@ -7,6 +7,25 @@ import VueAxios from "vue-axios";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
 import store from "./store";
 import VueInsProgressBar from 'vue-ins-progress-bar'
+import * as firebase from "firebase";
+
+var firebaseConfig = {
+  apiKey: "AIzaSyBGmr2azbkenZMtsLdT8k13M9_NRPIeFVo",
+  authDomain: "buivr-7e4fc.firebaseapp.com",
+  databaseURL: "https://buivr-7e4fc.firebaseio.com",
+  projectId: "buivr-7e4fc",
+  storageBucket: "buivr-7e4fc.appspot.com",
+  messagingSenderId: "993590564301",
+  appId: "1:993590564301:web:9de78aee8525db33d2a084",
+  measurementId: "G-KYXPY5D0ET"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch("fetchUser", user);
+});
 
 const options = {
   position: 'fixed',

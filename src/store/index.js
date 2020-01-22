@@ -9,7 +9,12 @@ export default new Vuex.Store({
     naam: "",
     id: "",
     sheet: [],
-    api_ip: "https://buivrapi.herokuapp.com"
+    api_ip: "https://buivrapi.herokuapp.com",
+    //token: "",
+    user: {
+      loggedIn: false,
+      data: {}
+    }
   },
   mutations: {
     setAccount(state, account) {
@@ -21,6 +26,12 @@ export default new Vuex.Store({
     },
     setNaam(state, naam) {
       state.naam = naam;
+    },
+    setLogin(state, login){
+      state.user.data = login;
+    },
+    setLoggedIn(state, loggedIn){
+      state.user.loggedIn = loggedIn
     },
     setSheet(state, sheet) {
       if (!state.sheet.some(el => el.id === sheet.id)) {
@@ -42,6 +53,15 @@ export default new Vuex.Store({
         .catch(e => {
           console.log(e);
         });
+    },
+    fetchUser({ commit }, user) {
+      commit("setLoggedIn", user !== null);
+      if (user) {
+        commit("setLogin", user);
+      } else {
+        commit("setLogin", null);
+        this.router.push({ path: 'login' })
+      }
     }
   },
   modules: {}

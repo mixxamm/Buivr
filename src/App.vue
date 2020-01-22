@@ -4,12 +4,11 @@
       <v-toolbar color="amber">
         <v-toolbar-title>Buivr</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-text class="body-1">{{naam}}</v-text>
+        {{this.$store.state.user.data.displayName}}
       </v-toolbar>
       <transition name="fade">
         <router-view class="router"></router-view>
       </transition>
-      <NaamDialog />
       <!-- <v-toolbar color="amber">
         <v-toolbar-title>Buivr</v-toolbar-title>
 
@@ -33,29 +32,16 @@
           </v-btn>
         </template> 
       </v-toolbar>-->
-      <v-bottom-navigation :value="activeBtn" grow color="amber" fixed shift>
-        <v-btn to="/">
-          <span>Bibs</span>
-          <v-icon>mdi-library</v-icon>
-        </v-btn>
-
-        <v-btn to="/colleges">
-          <span>Colleges</span>
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn to="/account">
-          <span>Account</span>
-          <v-icon>mdi-account-circle</v-icon>
-        </v-btn>
-      </v-bottom-navigation>
+      <Navbar/>
     </div>
     <vue-ins-progress-bar></vue-ins-progress-bar>
+    <NaamDialog />
   </v-app>
 </template>
 <script>
 //import HelloWorld from "./components/HelloWorld";
 import NaamDialog from "./components/NaamDialog";
+import Navbar from "./components/Navbar";
 
 export default {
   name: "App",
@@ -63,6 +49,7 @@ export default {
   components: {
     // HelloWorld
     NaamDialog,
+    Navbar
   },
   created: function() {
     this.$store.commit("setNaam", localStorage.getItem("naam"));
@@ -88,6 +75,10 @@ export default {
 .fade-enter /* .fade-leave-active below version 2.1.8 */ {
   /*transform: scale(0.98);*/
   opacity: 0;
+}
+
+span.v-btn__content{
+  height: 56px!important;
 }
 
 </style>
