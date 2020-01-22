@@ -10,7 +10,7 @@
           </v-col>-->
         </v-container>
         <v-card-actions>
-          <img class="login" src="../assets/google.svg" height="50" @click="login()" />
+          <v-btn @click="login()">Inloggen met Google</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
