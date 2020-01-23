@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import router from "../router/index"
 
 Vue.use(Vuex);
 
@@ -54,13 +55,16 @@ export default new Vuex.Store({
           console.log(e);
         });
     },
-    fetchUser({ commit }, user) {
+    fetchUser ({ commit }, user) {
       commit("setLoggedIn", user !== null);
       if (user) {
         commit("setLogin", user);
+
+        if(!this.state.user.loggedIn){
+          router.push({ path: 'login' })
+        }
       } else {
         commit("setLogin", null);
-        this.router.push({ path: 'login' })
       }
     }
   },

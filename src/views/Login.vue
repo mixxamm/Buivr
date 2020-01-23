@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    <v-btn @click="login()">Login</v-btn>
+  <div class="text-center">
+    <div v-if="!this.$store.state.user.loggedIn">
+      <h1 class="display-1">Login</h1>
+      <v-btn @click="login()">Login</v-btn>
+    </div>
+    <div v-else>
+      <h1>Welkom terug, {{this.$store.state.user.data.displayName}}</h1>
+      <img :src="this.$store.state.user.data.photoURL">
+    </div>
   </div>
 </template>
 
@@ -20,8 +26,9 @@ export default {
           // The signed-in user info.
           var user = result.user;
           // ...
-          console.log(token)//dit nog opslaan indien nodig voor verder gebruik
-          this.$store.commit("setLogin", user)
+          console.log(token); //dit nog opslaan indien nodig voor verder gebruik
+          this.$store.commit("setLogin", user);
+          this.$router.go(-1);
         })
         .catch(function(error) {
           // Handle Errors here.

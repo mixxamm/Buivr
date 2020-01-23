@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import store from "../store/index"
 
 Vue.use(VueRouter);
 
@@ -37,11 +38,18 @@ const routes = [
   }
 ];
 
+
+
 const router = new VueRouter({
   mode: "hash",
   // base: process.env.BASE_URL,
   base: "/",
   routes
 });
+
+router.beforeEach((to, from, next) => {
+  if (!store.state.user.loggedIn && to.path !== "/login") next('/login')
+  else next()
+})
 
 export default router;
