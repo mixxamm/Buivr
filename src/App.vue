@@ -90,4 +90,10 @@ export default {
   opacity: 0;
 }
 
+.naam{
+  margin: auto 10px;
+}
+.v-item-group.v-bottom-navigation .v-btn.v-size--default {
+  height: inherit;
+}
 </style>
